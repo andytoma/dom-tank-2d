@@ -1,0 +1,7 @@
+.tank{
+  width: 84px;
+  height: 84px;
+  position: absolute;
+  background-image: url(../images/sprite.png);
+  background-position: -84px 0;
+}
