@@ -1,7 +1,7 @@
 class Tank {
   constructor(color) {
     this.color = color;
-    this.direction = "up";
+    this.direction = "up" ;
     if (this.color == "green") {
       var y = 0;
     }else if (this.color == "blue") {
@@ -23,7 +23,15 @@ class Tank {
     this.dom = document.createElement('div');
     this.dom.className = "tank";
     this.dom.style.top = 0;
+    if (localStorage.getItem('player_tank_top') !== null) {
+        var top = localStorage.getItem('player_tank_top')
+        this.dom.style.top = top;
+    }
     this.dom.style.left = 0;
+    if (localStorage.getItem('player_tank_left') !== null) {
+        var left = localStorage.getItem('player_tank_left')
+        this.dom.style.left = left;
+    }
     game_map.appendChild( this.dom );
     this.animate();
   }
@@ -36,18 +44,22 @@ class Tank {
   turnUp(){
     this.dom.style.transform = "rotate(0deg)";
     this.direction = "up";
+    this.save();
   }
   turnRight(){
       this.dom.style.transform = "rotate(90deg)";
       this.direction = "right";
+      this.save();
   }
   turnDown(){
     this.dom.style.transform = "rotate(180deg)";
     this.direction = "down";
+    this.save();
   }
   turnLeft(){
     this.dom.style.transform = "rotate(270deg)";
     this.direction = "left";
+    this.save();
   }
 
   moveUp(){
@@ -58,7 +70,8 @@ class Tank {
     this.animate();
     let top = parseInt( this.dom.style.top );
         top -= 5;
-    this.dom.style.top = `${top}px`;
+        this.dom.style.top = `${top}px`;
+        this.save();
   }
   moveRight(){
     if (this.direction != "right") {
@@ -68,7 +81,8 @@ class Tank {
     this.animate();
       let left = parseInt( this.dom.style.left );
           left += 5;
-      this.dom.style.left = `${left}px`;
+          this.dom.style.left = `${left}px`;
+        this.save();
   }
   moveDown(){
     if (this.direction != "down") {
@@ -78,7 +92,8 @@ class Tank {
     this.animate();
     let top = parseInt( this.dom.style.top );
         top += 5;
-    this.dom.style.top = `${top}px`;
+        this.dom.style.top = `${top}px`;
+        this.save();
   }
   moveLeft(){
     if (this.direction != "left") {
@@ -89,24 +104,35 @@ class Tank {
     let left = parseInt( this.dom.style.left );
         left -= 5;
     this.dom.style.left = `${left}px`;
+        this.save();
   }
 
 //////////////////////////////////////
-save(){
-  // aici trebuie de salvat coordonatele directia , culoarea tankului
+ save(){
+   let top =  this.dom.style.top ;
+   let left =  this.dom.style.left ;
+   let dir =  this.direction ;
+   let culoarea =  this.color ;
+   localStorage.setItem('player_tank_top',top);
+   localStorage.setItem('player_tank_left',left);
+   localStorage.setItem('player_tank_direction',dir);
+   localStorage.setItem('player_tank_color',culoarea);
+
+   if (localStorage.getItem('player_tank_direction') !== null ) {
+     let d = localStorage.getItem('player_tank_direction');
+     this.direction = d;
+   }
+
+  // aici trebuie de salvat coordonatele, directia , culoarea tankului
   // localStorage.setItem()
   // 'player_tank_top' ->
   // 'player_tank_left' ->
   // 'player_tank_direction' ->
   // 'player_tank_color' ->
  // dupa fiecare miscare save
-  restore(){
     // aici trebuie de restaurate coordonatele directia , culoarea tankului
     // localStorage.setItem()
 
-  }
-
-}
-
+  };
 
 }
