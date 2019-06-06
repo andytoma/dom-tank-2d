@@ -1,7 +1,8 @@
 class Tank {
   constructor(color) {
     this.color = color;
-    this.direction = "up" ;
+    this.direction = localStorage.getItem('player_tank_direction') || "up" ;
+
     if (this.color == "green") {
       var y = 0;
     }else if (this.color == "blue") {
@@ -33,6 +34,11 @@ class Tank {
         this.dom.style.left = left;
     }
     game_map.appendChild( this.dom );
+
+    if( this.direction == "right") this.turnRight();
+    if( this.direction == "left") this.turnLeft();
+    if( this.direction == "down") this.turnDown();
+
     this.animate();
   }
 

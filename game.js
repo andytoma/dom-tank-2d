@@ -3,18 +3,19 @@ var game_map = document.getElementById('map');
 
 
 //////////////////////////////////////////
-
-var player_tank = new Tank( "green" );
-      player_tank.render();
-
-// var player = prompt( "Cu ce echipa joci???" , "green sau blue" );
-// if (player == "green") {
-//   var player_tank = new Tank( "green" );
+//
+// var player_tank = new Tank( "green" );
 //       player_tank.render();
-// }else if (player == "blue") {
-//   var bot = new Tank( "blue" );
-//       bot.render();
-// }
+
+var player = prompt( "Cu ce echipa joci???" , "green sau blue" );
+
+if (player == "green") {
+  var player_tank = new Tank( "green" );
+      player_tank.render();
+}else if (player == "blue") {
+  var player_tank = new Tank( "blue" );
+      player_tank.render();
+}
 
 
 
